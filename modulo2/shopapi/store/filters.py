@@ -1,6 +1,6 @@
 # store/filters.py
 import django_filters
-from store.models import Category, Product
+from store.models import Category, Product, Order
 
 
 class CategoryFilter(django_filters.FilterSet):
@@ -24,3 +24,12 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model  = Product
         fields = ['is_active', 'category']
+
+
+class OrderFilter(django_filters.FilterSet):
+    from_date = django_filters.DateFilter(field_name='created_at', lookup_expr='date__gte')
+    to_date   = django_filters.DateFilter(field_name='created_at', lookup_expr='date__lte')
+
+    class Meta:
+        model  = Order
+        fields = ['status']
