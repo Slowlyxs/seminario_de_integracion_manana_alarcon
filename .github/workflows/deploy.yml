@@ -12,9 +12,11 @@ jobs:
     
     services:
       postgres:
-        image: postgres:13
+        image: postgres:14
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: shopapi_db
+          POSTGRES_USER: shopapi_user
+          POSTGRES_PASSWORD: billing_pass_123
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -40,7 +42,7 @@ jobs:
         
     - name: Run tests
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+        DATABASE_URL: postgres://shopapi_user:billing_pass_123@localhost:5432/shopapi_db
         SECRET_KEY: test-secret-key
       run: |
         # Navigates to your nested app folder to find manage.py
