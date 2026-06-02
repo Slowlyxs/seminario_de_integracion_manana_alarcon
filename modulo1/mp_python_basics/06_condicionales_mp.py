@@ -2,8 +2,7 @@ print("condicionales simples")
 edad = input("Diga su edad:")
 if (int(edad)>=18):
     print("Mayor de edad, permitido para viajar")
-
-print("Cumple dos caminos")
+    
 temperatura=input("Incluye temperatura:")
 if(int(temperatura)>=38):
     print("Temperatura alta, prohibido viajar")
