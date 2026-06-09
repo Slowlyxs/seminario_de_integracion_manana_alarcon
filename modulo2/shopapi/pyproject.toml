@@ -12,4 +12,6 @@ dependencies = [
     "djangorestframework-simplejwt>=5.5.1",
     "psycopg2-binary>=2.9.12",
     "python-decouple>=3.8",
+    "gunicorn>=26.0.0",
+    "pillow>=12.2.0",
 ]

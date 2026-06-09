@@ -1,6 +1,5 @@
-# store/pagination.py
 from rest_framework.pagination import PageNumberPagination
-#Hola
+
 
 class StandardPagination(PageNumberPagination):
     page_size             = 10

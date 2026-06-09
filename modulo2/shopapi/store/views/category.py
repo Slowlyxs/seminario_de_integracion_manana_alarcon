@@ -36,8 +36,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
                 ProductSummarySerializer(page, many=True).data
             )
         return Response(ProductSummarySerializer(qs, many=True).data)
-        
-        return Response([])
 
     @action(detail=False, methods=['get'], url_path='stats')
     def stats(self, request):

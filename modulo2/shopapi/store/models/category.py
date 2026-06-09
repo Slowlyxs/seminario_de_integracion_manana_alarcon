@@ -1,3 +1,4 @@
+# store/models/category.py
 from django.db import models
 
 
