@@ -3,6 +3,8 @@ import type { OrderRepository } from '@/domain/ports/order.repository'
 import type { Order } from '@/domain/entities/order.entity'
 import type { PaginatedResult } from '@/domain/entities/paginated-result.entity'
 import type { AddItemDto } from '@/application/dtos/add-item.dto'
+import type { OrderStats } from '@/domain/entities/order-stats.entity'
+
 
 export class OrderUseCase {
   constructor(private readonly orderRepository: OrderRepository) {}
@@ -26,4 +28,7 @@ export class OrderUseCase {
   confirmOrder(orderId: number): Promise<Order> {
     return this.orderRepository.confirmOrder(orderId)
   }
+  getStats(): Promise<OrderStats> {
+  return this.orderRepository.getStats()
+}
 }
