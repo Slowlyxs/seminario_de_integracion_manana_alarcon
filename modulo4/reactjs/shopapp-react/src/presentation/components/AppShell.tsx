@@ -15,6 +15,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
+import { useEffect } from 'react'
+import { useProfileStore } from '@/presentation/store/profile.store'
+import { useCartStore } from '@/presentation/store/cart.store'
+import { UserAvatar } from './UserAvatar'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -36,12 +40,19 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
 export default function AppShell() {
   const navigate = useNavigate()
   const { user, logout } = useAuthStore()
+  const { profile, fetchProfile, clearProfile } = useProfileStore()
+  const cartItemCount = useCartStore((s) => s.itemCount())
 
-  // En módulos siguientes esto vendrá del CartStore
-  const cartItemCount = useCartStore((state) => state.itemCount())
+  // Carga el perfil una sola vez cuando hay sesión activa
+  useEffect(() => {
+    if (user && !profile) {
+      fetchProfile()
+    }
+  }, [user, profile, fetchProfile])
 
   async function handleLogout() {
     await logout()
+    clearProfile()
     navigate('/login', { replace: true })
   }
 
@@ -110,17 +121,9 @@ export default function AppShell() {
             {/* Usuario autenticado → menú desplegable */}
             {user ? (
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button
-                    variant="ghost"
-                    className="relative h-9 w-9 rounded-full"
-                    aria-label="Menú de usuario"
-                  >
-                    <Avatar className="h-9 w-9">
-                      <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-                        {getInitials(user.username)}
-                      </AvatarFallback>
-                    </Avatar>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-9 w-9 rounded-full" aria-label="Menú de usuario">
+                    <UserAvatar user={profile} size="sm" />
                   </Button>
                 </DropdownMenuTrigger>
 

@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute'
 import AppShell from '@/presentation/components/AppShell'
 import PlaceholderPage from '../pages/PlaceholderPage'
 
+
 // ─── Lazy imports ─────────────────────────────────────────────────────────────
 
 // Auth (sin shell) — reales desde este módulo
@@ -17,6 +18,8 @@ const CartPage = lazy(() => import('../pages/cart/CartPage'))
 const CheckoutPage = lazy(() => import('../pages/orders/CheckoutPage'))
 const OrdersPage = lazy(() => import('../pages/orders/OrdersPage'))
 const OrderDetailPage = lazy(() => import('../pages/orders/OrderDetailPage'))
+const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'))
+
 
 
 
@@ -93,7 +96,7 @@ export default function AppRouter() {
               path="/profile"
               element={
                 <ProtectedRoute>
-                  <PlaceholderPage title="Perfil — Módulo 8" />
+                  < ProfilePage/>
                 </ProtectedRoute>
               }
             />
