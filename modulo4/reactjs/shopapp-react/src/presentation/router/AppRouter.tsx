@@ -12,6 +12,8 @@ import PlaceholderPage from '../pages/PlaceholderPage'
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
 const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
 const CatalogPage = lazy(() => import('../pages/catalog/CatalogPage'))
+const ProductDetailPage = lazy(() => import('../pages/catalog/ProductDetailPage'))
+
 
 
 // El resto de páginas todavía no existen: se implementan en módulos posteriores
@@ -65,6 +67,7 @@ export default function AppRouter() {
             />
             <Route path="/" element={<CatalogPage />} />
             <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
             <Route
               path="/orders"
               element={
