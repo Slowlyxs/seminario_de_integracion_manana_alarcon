@@ -4,6 +4,7 @@ import { ShoppingBag, ShoppingCart, Package, User, LogOut, LayoutDashboard } fro
 import { useAuthStore } from '@/presentation/store/auth.store'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { useCartStore } from '@/presentation/store/cart.store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +38,7 @@ export default function AppShell() {
   const { user, logout } = useAuthStore()
 
   // En módulos siguientes esto vendrá del CartStore
-  const cartItemCount = 0
+  const cartItemCount = useCartStore((state) => state.itemCount())
 
   async function handleLogout() {
     await logout()
