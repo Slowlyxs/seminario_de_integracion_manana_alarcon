@@ -2,8 +2,8 @@
 import { Outlet, Link, useNavigate, NavLink } from 'react-router-dom'
 import { ShoppingBag, ShoppingCart, Package, User, LogOut, LayoutDashboard } from 'lucide-react'
 import { useAuthStore } from '@/presentation/store/auth.store'
-import { Button } from '@/presentation/components/ui/button'
-import { Badge } from '@/presentation/components/ui/badge'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/presentation/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback } from '@/presentation/components/ui/avatar'
-import { Separator } from '@/presentation/components/ui/separator'
+} from '@/components/ui/dropdown-menu'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Separator } from '@/components/ui/separator'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -89,31 +89,27 @@ export default function AppShell() {
           <div className="flex items-center gap-2">
             {/* Carrito */}
             {user && (
-              <Button
-                variant="ghost"
-                size="icon"
-                asChild
-                className="relative"
+              <Link
+                to="/cart"
+                className={buttonVariants({ variant: 'ghost', size: 'icon' }) + ' relative'}
                 aria-label="Carrito de compras"
               >
-                <Link to="/cart">
-                  <ShoppingCart className="h-5 w-5" />
-                  {cartItemCount > 0 && (
-                    <Badge
-                      variant="destructive"
-                      className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
-                    >
-                      {cartItemCount > 99 ? '99+' : cartItemCount}
-                    </Badge>
-                  )}
-                </Link>
-              </Button>
+                <ShoppingCart className="h-5 w-5" />
+                {cartItemCount > 0 && (
+                  <Badge
+                    variant="destructive"
+                    className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
+                  >
+                    {cartItemCount > 99 ? '99+' : cartItemCount}
+                  </Badge>
+                )}
+              </Link>
             )}
 
             {/* Usuario autenticado → menú desplegable */}
             {user ? (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger>
                   <Button
                     variant="ghost"
                     className="relative h-9 w-9 rounded-full"
@@ -139,28 +135,28 @@ export default function AppShell() {
 
                   <DropdownMenuSeparator />
 
-                  <DropdownMenuItem asChild>
-                    <Link to="/profile" className="flex items-center gap-2 cursor-pointer">
+                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                    <div className="flex items-center gap-2 cursor-pointer">
                       <User className="h-4 w-4" />
                       Mi perfil
-                    </Link>
+                    </div>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem asChild>
-                    <Link to="/orders" className="flex items-center gap-2 cursor-pointer">
+                  <DropdownMenuItem onClick={() => navigate('/orders')}>
+                    <div className="flex items-center gap-2 cursor-pointer">
                       <Package className="h-4 w-4" />
                       Mis pedidos
-                    </Link>
+                    </div>
                   </DropdownMenuItem>
 
                   {user.is_staff && (
                     <>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
-                        <Link to="/admin" className="flex items-center gap-2 cursor-pointer">
+                      <DropdownMenuItem onClick={() => navigate('/admin')}>
+                        <div className="flex items-center gap-2 cursor-pointer">
                           <LayoutDashboard className="h-4 w-4" />
                           Panel Admin
-                        </Link>
+                        </div>
                       </DropdownMenuItem>
                     </>
                   )}
@@ -178,9 +174,9 @@ export default function AppShell() {
               </DropdownMenu>
             ) : (
               /* Usuario no autenticado → botón de login */
-              <Button asChild size="sm">
-                <Link to="/login">Iniciar sesión</Link>
-              </Button>
+              <Link to="/login" className={buttonVariants({ size: 'sm' })}>
+                Iniciar sesión
+              </Link>
             )}
           </div>
         </div>

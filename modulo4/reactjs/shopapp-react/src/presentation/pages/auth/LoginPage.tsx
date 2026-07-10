@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { Loader2, ShoppingBag } from 'lucide-react'
 
 import { useAuthStore } from '@/presentation/store/auth.store'
-import { Button } from '@/presentation/components/ui/button'
-import { Input } from '@/presentation/components/ui/input'
-import { Label } from '@/presentation/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Card,
   CardContent,
@@ -17,7 +17,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/presentation/components/ui/card'
+} from '@/components/ui/card'
 
 // ─── Schema de validación ─────────────────────────────────────────────────────
 
