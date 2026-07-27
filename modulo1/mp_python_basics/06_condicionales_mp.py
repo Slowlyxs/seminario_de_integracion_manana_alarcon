@@ -29,7 +29,7 @@ plato="pizza"
 if(tiene_reserva):
     if(dinero>=20):
         if plato=="pizza":
-            print("Tu pizza cuesta $20. Pedido confirmado")
+            print("Tu plato business cuesta $20. Pedido confirmado")
         else:
             print("Plato disponible")
     else:
